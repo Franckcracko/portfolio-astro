@@ -1,10 +1,22 @@
 ---
-import { AvatarIcon } from "../components/react/AvatarIcon.jsx";
-import { GithubIcon } from "../components/react/GithubIcon.jsx";
+import GithubIcon from "../components/icons/GithubIcon.astro";
+import AvatarIcon from "../components/icons/AvatarIcon.astro";
+import LinkedinIcon from "../components/icons/LinkedinIcon.astro";
 import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+
+const projects = [
+	{
+		img: "/image 1.png",
+		href: "https://curus.org",
+		title: "Curus",
+		details:
+			"Durante la preparatoria, llevamos a cabo un proyecto que consistió en la creación de una página para simular y demostrar nuestro prototipo para un concurso a nivel estatal.",
+	},
+];
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Portafolio Brian Martínez">
 	<main>
 		<div class="grid place-content-center">
 			<article class="max-w-[550px] px-2 sm:px-0">
@@ -20,22 +32,41 @@ import Layout from "../layouts/Layout.astro";
 							>
 						</h1>
 
-						<div class="mt-4 flex gap-x-4">
-							<a href="#">
-								<GithubIcon />
+						<div class="mt-4 flex items-center gap-x-4">
+							<a href="https://github.com/Franckcracko" target="_blank">
+								<GithubIcon class="w-8 h-8 fill-white" />
 							</a>
-							<a href="#">
-								<img
-									src="/linkedin.svg"
-									class="w-[24px] h-[24px]"
-									alt="icono likedin"
-								/>
+							<a
+								href="https://www.linkedin.com/in/brian-leonardo-martinez-cobos-8a5692229"
+								target="_blank"
+							>
+								<LinkedinIcon class="w-8 h-8" />
 							</a>
-							<button
-								class="transition-colors font-semibold border rounded shadow px-10 h-[24pxs] border-[#F3F4F6] hover:bg-[#F3F4F6] hover:text-[#3e516d]"
+							<a
+								href="/cv.pdf"
+								download
+								class="flex items-center py-2.5 px-5 text-sm font-medium focus:outline-none rounded-lg border focus:z-10 focus:ring-4 focus:ring-gray-700 bg-gray-800 text-gray-400 border-gray-600 hover:text-white hover:bg-gray-700"
 							>
 								CV
-							</button>
+								<svg
+									class="w-4 h-4 icon icon-tabler icon-tabler-file-cv"
+									viewBox="0 0 24 24"
+									stroke-width="1.5"
+									stroke="#2c3e50"
+									fill="currentColor"
+									stroke-linecap="round"
+									stroke-linejoin="round"
+								>
+									<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+									<path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+									<path
+										d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z"
+									></path>
+									<path d="M11 12.5a1.5 1.5 0 0 0 -3 0v3a1.5 1.5 0 0 0 3 0"
+									></path>
+									<path d="M13 11l1.5 6l1.5 -6"></path>
+								</svg>
+							</a>
 						</div>
 					</div>
 				</section>
@@ -54,52 +85,16 @@ import Layout from "../layouts/Layout.astro";
 				<section class="pt-32">
 					<h2 class="text-3xl font-semibold mb-4">Proyectos</h2>
 					<div class="flex px-4 sm:px-0 gap-y-6 flex-col items-center">
-						<div class="flex-col w-full sm:w-[400px]">
-							<figure class="flex-1 p-3 w-full h-auto bg-[#293342] rounded shadow">
-								<a class="hover:brightness-100 brightness-75 transition-all " href="#">
-									<img class="object-cover hover:scale-[1.01] w-full transition-transform" src="/image 1.png" alt="Imagen Proyecto" />
-								</a>
-							</figure>
-							<div class="mt-2 flex">
-								<a href="#" class="underline"> Titulo</a>
-								<button class="ml-3">
-									<svg
-										fill="#F3F4F6"
-										width={16}
-										height={16}
-										viewBox="0 0 284.929 284.929"
-										style="enable-background:new 0 0 284.929 284.929;"
-									>
-										<g>
-											<path
-												d="M282.082,76.511l-14.274-14.273c-1.902-1.906-4.093-2.856-6.57-2.856c-2.471,0-4.661,0.95-6.563,2.856L142.466,174.441
-							 L30.262,62.241c-1.903-1.906-4.093-2.856-6.567-2.856c-2.475,0-4.665,0.95-6.567,2.856L2.856,76.515C0.95,78.417,0,80.607,0,83.082
-							 c0,2.473,0.953,4.663,2.856,6.565l133.043,133.046c1.902,1.903,4.093,2.854,6.567,2.854s4.661-0.951,6.562-2.854L282.082,89.647
-							 c1.902-1.903,2.847-4.093,2.847-6.565C284.929,80.607,283.984,78.417,282.082,76.511z"
-											></path>
-										</g>
-										<g> </g>
-										<g> </g>
-										<g> </g>
-										<g> </g>
-										<g> </g>
-										<g> </g>
-										<g> </g>
-										<g> </g>
-										<g> </g>
-										<g> </g>
-										<g> </g>
-										<g> </g>
-										<g> </g>
-										<g> </g>
-										<g> </g>
-									</svg>
-								</button>
-								<div class="ml-6 flex-1">
-									Stack Tecnologias
-								</div>
-							</div>
-						</div>
+						{
+							projects.map((project) => (
+								<Card
+									img={project.img}
+									href={project.href}
+									title={project.title}
+									details={project.details}
+								/>
+							))
+						}
 					</div>
 				</section>
 			</article>
